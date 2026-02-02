@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreelanceFlow | Invoices</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fa-solid fa-bolt"></i> FreelanceFlow
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                    <li><a href="clients.html" class="nav-link"><i class="fa-solid fa-users"></i> Clients</a></li>
+                    <li><a href="projects.html" class="nav-link"><i class="fa-solid fa-briefcase"></i> Projects</a></li>
+                    <li><a href="time-tracking.html" class="nav-link"><i class="fa-solid fa-clock"></i> Time
+                            Tracking</a></li>
+                    <li><a href="#" class="nav-link active"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices</a>
+                    </li>
+                    <li><a href="analytics.html" class="nav-link"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+                    </li>
+                    <li><a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Wrapper -->
+        <div class="main-content">
+            <!-- Top Navigation -->
+            <header class="topbar">
+                <button id="toggle-sidebar" class="toggle-sidebar-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="invoiceSearchInput" placeholder="Search invoices...">
+                </div>
+
+                <div class="topbar-actions">
+                    <button class="icon-btn theme-toggle" id="theme-toggle">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                    <div class="notifications icon-btn">
+                        <i class="fa-regular fa-bell"></i>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=Alex+Doe&background=1E3A8A&color=fff" alt="User"
+                            class="avatar">
+                        <span class="user-name">Alex Doe</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="container-fluid">
+                <div class="page-header">
+                    <div class="page-header-info">
+                        <h1>Invoices</h1>
+                        <p class="text-muted">Manage billing and payments.</p>
+                    </div>
+                    <button id="openInvoiceModalBtn" class="btn btn-primary flex-center gap-2">
+                        <i class="fa-solid fa-plus"></i> Create Invoice
+                    </button>
+                </div>
+
+                <!-- Invoice Action Dropdown -->
+                <div id="invoiceActionDropdown" class="action-dropdown">
+                    <ul>
+                        <li><a href="#" class="view-invoice-link"><i class="fa-solid fa-eye"></i> View Details</a></li>
+                        <li><a href="#" class="edit-invoice-link"><i class="fa-solid fa-pen-to-square"></i> Edit
+                                Invoice</a></li>
+                        <li><a href="#" class="download-invoice-link"><i class="fa-solid fa-download"></i> Download
+                                PDF</a></li>
+                        <li><a href="#" class="text-danger remove-invoice-link"><i class="fa-solid fa-trash"></i> Delete
+                                Invoice</a></li>
+                    </ul>
+                </div>
+
+                <!-- Add Invoice Modal -->
+                <div id="addInvoiceModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <div class="modal-header">
+                            <h2>Create New Invoice</h2>
+                            <p class="text-muted">Enter invoice details below.</p>
+                        </div>
+                        <form id="addInvoiceForm">
+                            <div class="form-group">
+                                <label class="form-label">Client</label>
+                                <select class="form-control" id="invoiceClientSelect" required>
+                                    <option value="" disabled selected>Select Client</option>
+                                    <!-- Options will be populated securely from your client list -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                    <div>
+                                        <label class="form-label">Date</label>
+                                        <input type="date" id="invoiceDate" class="form-control" required>
+                                    </div>
+                                    <div>
+                                        <label class="form-label">Due Date</label>
+                                        <input type="date" id="invoiceDueDate" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Amount ($)</label>
+                                <input type="number" id="invoiceAmount" class="form-control" placeholder="0.00" min="0"
+                                    step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Status</label>
+                                <select class="form-control" id="invoiceStatus" required>
+                                    <option value="paid">Paid</option>
+                                    <option value="pending" selected>Pending</option>
+                                    <option value="overdue">Overdue</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Notes</label>
+                                <textarea id="invoiceNote" class="form-control" rows="3"
+                                    placeholder="Additional notes or payment instructions..."></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary close-modal-btn">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Create Invoice</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- View Invoice Modal -->
+                <div id="viewInvoiceModal" class="modal">
+                    <div class="modal-content"
+                        style="max-width: 850px; padding: 0; background: #f8fafc; overflow: hidden;">
+                        <span class="close-modal"
+                            style="position: absolute; top: 1.5rem; right: 1.5rem; z-index: 10;">&times;</span>
+
+                        <div class="invoice-document" id="invoiceCaptureArea">
+                            <!-- Invoice Header -->
+                            <div class="invoice-header">
+                                <div class="invoice-branding">
+                                    <div class="logo">
+                                        <i class="fa-solid fa-bolt"></i> FreelanceFlow
+                                    </div>
+                                    <p class="text-muted" style="font-size: 0.85rem;">Professional Software Solutions
+                                    </p>
+                                </div>
+                                <div class="invoice-title">
+                                    <h1>INVOICE</h1>
+                                    <p style="font-weight: 600; color: var(--text-main); margin-top: 0.5rem;"
+                                        id="viewInvId">#INV-0000</p>
+                                </div>
+                            </div>
+
+                            <!-- Invoice Details Grid -->
+                            <div class="invoice-grid">
+                                <div>
+                                    <h4>Invoice To</h4>
+                                    <p style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem;"
+                                        id="viewInvClient">Client Name</p>
+                                    <p class="text-muted" style="font-size: 0.9rem;">Customer</p>
+                                </div>
+                                <div>
+                                    <h4>Invoice Details</h4>
+                                    <div class="invoice-info-item">
+                                        <strong>Date:</strong> <span id="viewInvDate">Jan 24, 2026</span>
+                                    </div>
+                                    <div class="invoice-info-item">
+                                        <strong>Due Date:</strong> <span id="viewInvDue">Feb 04, 2026</span>
+                                    </div>
+                                    <div class="invoice-info-item">
+                                        <strong>Status:</strong> <span id="viewInvStatusBadge">Pending</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Summary Table -->
+                            <div class="invoice-table-container">
+                                <table class="invoice-summary-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Description</th>
+                                            <th style="text-align: right;">Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="font-weight: 500;">
+                                                Project Services / Professional Work
+                                                <p id="viewInvNoteDisplay"
+                                                    style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; font-weight: 400;">
+                                                </p>
+                                            </td>
+                                            <td style="text-align: right; font-weight: 600; font-size: 1.1rem;"
+                                                id="viewInvAmountBody">$0.00</td>
+                                        </tr>
+                                        <tr class="invoice-total-row">
+                                            <td></td>
+                                            <td style="text-align: right;">
+                                                <div class="total-amount-box">
+                                                    <span>Total Amount Due</span>
+                                                    <strong id="viewInvAmountTotal">$0.00</strong>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Footer -->
+                            <div class="invoice-footer">
+                                <p style="font-weight: 600; color: var(--text-main); margin-bottom: 0.5rem;">Terms &
+                                    Conditions</p>
+                                <p>Please make payment within the due date. Thank you for your business!</p>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer"
+                            style="padding: 1.5rem 3rem; background: #fff; border-top: 1px solid var(--border-color);">
+                            <button type="button" class="btn btn-secondary close-modal-btn">Close</button>
+                            <button type="button" class="btn btn-primary" id="modalDownloadBtn"
+                                style="background: var(--text-main); color: #fff;">
+                                <i class="fa-solid fa-download"></i> Download Modern Invoice (.html)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom: 2rem;">
+                    <div class="invoice-filters"
+                        style="display: flex; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+                        <button class="filter-btn active" data-filter="all"
+                            style="border: none; background: none; color: var(--primary-color); font-weight: 600; border-bottom: 2px solid var(--primary-color); padding-bottom: 0.5rem; cursor: pointer;">All
+                            Invoices</button>
+                        <button class="filter-btn" data-filter="paid"
+                            style="border: none; background: none; color: var(--text-muted); font-weight: 500; padding-bottom: 0.5rem; cursor: pointer;">Paid</button>
+                        <button class="filter-btn" data-filter="pending"
+                            style="border: none; background: none; color: var(--text-muted); font-weight: 500; padding-bottom: 0.5rem; cursor: pointer;">Pending</button>
+                        <button class="filter-btn" data-filter="overdue"
+                            style="border: none; background: none; color: var(--text-muted); font-weight: 500; padding-bottom: 0.5rem; cursor: pointer;">Overdue</button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Invoice ID</th>
+                                    <th>Client</th>
+                                    <th>Date</th>
+                                    <th>Due Date</th>
+                                    <th>Amount</th>
+                                    <th>Note</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="invoiceTableBody">
+                                <!-- Dynamic Content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Reusing the main script for logic -->
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

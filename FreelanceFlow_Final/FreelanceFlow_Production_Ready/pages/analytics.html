@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreelanceFlow | Analytics</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fa-solid fa-bolt"></i> FreelanceFlow
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                    <li><a href="clients.html" class="nav-link"><i class="fa-solid fa-users"></i> Clients</a></li>
+                    <li><a href="projects.html" class="nav-link"><i class="fa-solid fa-briefcase"></i> Projects</a></li>
+                    <li><a href="time-tracking.html" class="nav-link"><i class="fa-solid fa-clock"></i> Time
+                            Tracking</a></li>
+                    <li><a href="invoices.html" class="nav-link"><i class="fa-solid fa-file-invoice-dollar"></i>
+                            Invoices</a></li>
+                    <li><a href="#" class="nav-link active"><i class="fa-solid fa-chart-line"></i> Analytics</a></li>
+                    <li><a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Wrapper -->
+        <div class="main-content">
+            <!-- Top Navigation -->
+            <header class="topbar">
+                <button id="toggle-sidebar" class="toggle-sidebar-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="analyticsSearchInput" placeholder="Search analytics data...">
+                </div>
+
+                <div class="topbar-actions">
+                    <button class="icon-btn theme-toggle" id="theme-toggle">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                    <div class="notifications icon-btn">
+                        <i class="fa-regular fa-bell"></i>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=Rahul+singh&background=1E3A8A&color=fff" alt="User"
+                            class="avatar">
+                        <span class="user-name">Rahul singh</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="container-fluid">
+                <div class="page-header">
+                    <div class="page-header-info">
+                        <h1>Analytics</h1>
+                        <p class="text-muted">Financial performance and growth metrics.</p>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="grid-template grid-2" style="margin-bottom: 2rem;">
+                    <!-- Income vs Expenses -->
+                    <div class="card">
+                        <div class="card-header" style="margin-bottom: 1.5rem;">
+                            <h4 class="card-title" style="margin:0;">Income vs Expenses</h4>
+                        </div>
+                        <canvas id="incomeVsExpensesChart" height="250"></canvas>
+                    </div>
+
+                    <!-- Monthly Growth -->
+                    <div class="card">
+                        <div class="card-header" style="margin-bottom: 1.5rem;">
+                            <h4 class="card-title" style="margin:0;">Client Acquisition</h4>
+                        </div>
+                        <canvas id="growthChart" height="250"></canvas>
+                    </div>
+                </div>
+
+                <!-- Detailed Stats -->
+                <div class="grid-template grid-4" style="margin-bottom: 2rem;">
+                    <div class="card kpi-card">
+                        <h3 class="kpi-value">$0.00</h3>
+                        <p class="kpi-label">Total Revenue (YTD)</p>
+                    </div>
+                    <div class="card kpi-card">
+                        <h3 class="kpi-value">$0.00</h3>
+                        <p class="kpi-label">Expenses (YTD)</p>
+                    </div>
+                    <div class="card kpi-card">
+                        <h3 class="kpi-value">$0.00</h3>
+                        <p class="kpi-label">Net Profit</p>
+                    </div>
+                    <div class="card kpi-card">
+                        <h3 class="kpi-value">0%</h3>
+                        <p class="kpi-label">Profit Margin</p>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Reusing the main script for logic -->
+    <script src="../js/script.js"></script>
+    <script>
+        // Income vs Expenses
+        const ctxIncExp = document.getElementById('incomeVsExpensesChart').getContext('2d');
+        new Chart(ctxIncExp, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [
+                    {
+                        label: 'Income',
+                        data: [0, 0, 0, 0, 0, 0],
+                        backgroundColor: '#2E8B57'
+                    },
+                    {
+                        label: 'Expenses',
+                        data: [0, 0, 0, 0, 0, 0],
+                        backgroundColor: '#E53E3E'
+                    }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+
+        // Growth Chart
+        const ctxGrowth = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctxGrowth, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'New Clients',
+                    data: [0, 0, 0, 0, 0, 0],
+                    borderColor: '#3182CE',
+                    tension: 0.4
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreelanceFlow | Projects</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fa-solid fa-bolt"></i> FreelanceFlow
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                    <li><a href="clients.html" class="nav-link"><i class="fa-solid fa-users"></i> Clients</a></li>
+                    <li><a href="#" class="nav-link active"><i class="fa-solid fa-briefcase"></i> Projects</a></li>
+                    <li><a href="time-tracking.html" class="nav-link"><i class="fa-solid fa-clock"></i> Time
+                            Tracking</a></li>
+                    <li><a href="invoices.html" class="nav-link"><i class="fa-solid fa-file-invoice-dollar"></i>
+                            Invoices</a></li>
+                    <li><a href="analytics.html" class="nav-link"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+                    </li>
+                    <li><a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Wrapper -->
+        <div class="main-content">
+            <!-- Top Navigation -->
+            <header class="topbar">
+                <button id="toggle-sidebar" class="toggle-sidebar-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="projectSearchInput" placeholder="Search projects...">
+                </div>
+
+                <div class="topbar-actions">
+                    <button class="icon-btn theme-toggle" id="theme-toggle">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                    <div class="notifications icon-btn">
+                        <i class="fa-regular fa-bell"></i>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=Rahul+singh&background=1E3A8A&color=fff" alt="User"
+                            class="avatar">
+                        <span class="user-name">Rahul singh</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="container-fluid">
+                <div class="page-header">
+                    <div class="page-header-info">
+                        <h1>Projects</h1>
+                        <p class="text-muted">Track your active and past projects.</p>
+                    </div>
+                    <button id="openProjectModalBtn" class="btn btn-primary flex-center gap-2">
+                        <i class="fa-solid fa-plus"></i> New Project
+                    </button>
+                </div>
+
+                <!-- Projects Grid -->
+                <div id="projectsGrid" class="grid-template grid-3 mb-4">
+                    <!-- Empty State -->
+                    <div class="card text-center p-4 text-muted w-full" style="grid-column: 1 / -1;">
+                        <i class="fa-solid fa-folder-open mb-3" style="font-size: 3rem; opacity: 0.5;"></i>
+                        <p>No projects yet. Create a new project to start tracking.</p>
+                    </div>
+                </div>
+
+                <!-- Project Action Dropdown -->
+                <div id="projectActionDropdown" class="action-dropdown">
+                    <ul>
+                        <li><a href="#"><i class="fa-solid fa-pen-to-square"></i> Edit Project</a></li>
+                        <li><a href="#" class="text-danger"><i class="fa-solid fa-trash"></i> Delete Project</a></li>
+                    </ul>
+                </div>
+
+                <!-- Add Project Modal -->
+                <div id="addProjectModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <div class="modal-header">
+                            <h2>Create New Project</h2>
+                        </div>
+                        <form id="addProjectForm">
+                            <div class="form-group">
+                                <label class="form-label">Project Name</label>
+                                <input type="text" class="form-control" placeholder="e.g. Website Redesign" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Client</label>
+                                <select class="form-control" id="projectClientSelect">
+                                    <option value="" disabled selected>Select Client</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Deadline</label>
+                                <input type="date" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Status</label>
+                                <select class="form-control">
+                                    <option value="active">In Progress</option>
+                                    <option value="pending">Planning</option>
+                                    <option value="review">Review</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Initial Progress (%)</label>
+                                <input type="number" class="form-control" min="0" max="100" value="0">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Notes</label>
+                                <textarea class="form-control" rows="3" placeholder="Project details..."></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary close-modal-btn">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Create Project</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Reusing the main script for logic -->
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

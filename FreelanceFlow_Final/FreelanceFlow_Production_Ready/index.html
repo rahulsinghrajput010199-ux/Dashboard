@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreelanceFlow | Dashboard</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fa-solid fa-bolt"></i> FreelanceFlow
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li><a href="#" class="nav-link active"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                    <li><a href="pages/clients.html" class="nav-link"><i class="fa-solid fa-users"></i> Clients</a></li>
+                    <li><a href="pages/projects.html" class="nav-link"><i class="fa-solid fa-briefcase"></i>
+                            Projects</a></li>
+                    <li><a href="pages/time-tracking.html" class="nav-link"><i class="fa-solid fa-clock"></i> Time
+                            Tracking</a></li>
+                    <li><a href="pages/invoices.html" class="nav-link"><i class="fa-solid fa-file-invoice-dollar"></i>
+                            Invoices</a></li>
+                    <li><a href="pages/analytics.html" class="nav-link"><i class="fa-solid fa-chart-line"></i>
+                            Analytics</a></li>
+                    <li><a href="pages/settings.html" class="nav-link"><i class="fa-solid fa-gear"></i> Settings</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Wrapper -->
+        <div class="main-content">
+            <!-- Top Navigation -->
+            <header class="topbar">
+                <button id="toggle-sidebar" class="toggle-sidebar-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="globalSearchInput" placeholder="Search projects, clients...">
+                </div>
+
+                <div class="topbar-actions">
+                    <button class="icon-btn theme-toggle" id="theme-toggle">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                    <div class="notifications icon-btn" id="notificationBtn">
+                        <i class="fa-regular fa-bell"></i>
+                        <span
+                            style="position: absolute; top: 0; right: 0; width: 8px; height: 8px; background: #e53e3e; border-radius: 50%; border: 1px solid var(--bg-card);"></span>
+                    </div>
+                    <!-- Notification Dropdown -->
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="dropdown-header">
+                            <h4>Notifications</h4>
+                            <span class="text-muted" style="font-size: 0.8rem; cursor: pointer;">Mark all read</span>
+                        </div>
+                        <ul class="notification-list">
+                            <!-- Empty State -->
+                            <li style="text-align: center; padding: 1rem; color: var(--text-muted);">
+                                No new notifications
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=Rahul+singh&background=1E3A8A&color=fff" alt="User"
+                            class="avatar">
+                        <span class="user-name">Rahul singh</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <main class="container-fluid">
+                <!-- Welcome Section -->
+                <div class="page-header">
+                    <div class="page-header-info">
+                        <h1 id="userWelcome">Welcome back, Rahul! 👋</h1>
+                        <p class="text-muted">Here's what's happening with your projects today.</p>
+                    </div>
+                </div>
+
+                <!-- KPI Cards -->
+                <div class="grid-template grid-4 mb-4">
+                    <!-- Card 1 -->
+                    <div class="card kpi-card kpi-income">
+                        <div class="kpi-icon">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+                        <h3 class="kpi-value" id="monthlyIncomeCount">$0.00</h3>
+                        <p class="kpi-label">Monthly Income</p>
+                        <span class="kpi-trend">
+                            <i class="fa-solid fa-minus"></i> 0%
+                        </span>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="card kpi-card kpi-clients">
+                        <div class="kpi-icon">
+                            <i class="fa-solid fa-user-group"></i>
+                        </div>
+                        <h3 class="kpi-value" id="activeClientsCount">0</h3>
+                        <p class="kpi-label">Active Clients</p>
+                        <span class="kpi-trend">
+                            <i class="fa-solid fa-minus"></i> 0 New
+                        </span>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="card kpi-card kpi-projects">
+                        <div class="kpi-icon">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <h3 class="kpi-value" id="pendingProjectsCount">0</h3>
+                        <p class="kpi-label">Pending Projects</p>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="card kpi-card kpi-hours">
+                        <div class="kpi-icon">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <h3 class="kpi-value" id="hoursTrackedCount">0h</h3>
+                        <p class="kpi-label">Hours Tracked</p>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="grid-template grid-2 mb-4">
+                    <div class="card">
+                        <div class="card-header flex-between mb-3">
+                            <h4 class="card-title" style="margin:0;">Income Analytics</h4>
+                            <select class="settings-select"
+                                style="padding: 0.25rem 0.5rem; border-radius: 4px; border: 1px solid var(--border-color); background: var(--bg-body); color: var(--text-main);">
+                                <option>Last 6 Months</option>
+                                <option>This Year</option>
+                            </select>
+                        </div>
+                        <canvas id="incomeChart" height="250"></canvas>
+                    </div>
+                    <div class="card">
+                        <div class="card-header flex-between mb-3">
+                            <h4 class="card-title" style="margin:0;">Project Status</h4>
+                        </div>
+                        <canvas id="projectChart" height="250"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Activity & Projects Grid -->
+                <div class="grid-template grid-2 mb-4">
+                    <!-- Recent Activity -->
+                    <div class="card">
+                        <div class="card-header mb-3">
+                            <h4 class="card-title" style="margin:0;">Recent Activity</h4>
+                        </div>
+                        <div class="activity-feed">
+                            <!-- Empty State -->
+                            <div class="text-center p-4 text-muted">
+                                <p>No recent activity.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Active Projects Progress -->
+                    <div class="card">
+                        <div class="card-header flex-between mb-3">
+                            <h4 class="card-title" style="margin:0;">Active Projects</h4>
+                            <a href="pages/projects.html" class="btn-link">View All</a>
+                        </div>
+                        <!-- Active Projects List -->
+                        <div id="activeProjectsList">
+                            <div class="text-center p-4 text-muted">
+                                <p>No active projects.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Clients -->
+                <div class="card mb-4">
+                    <div class="card-header flex-between mb-3">
+                        <h4 class="card-title" style="margin:0;">Recent Clients</h4>
+                        <a href="pages/clients.html" class="btn-link">View All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Client</th>
+                                    <th>Note</th>
+                                    <th>Status</th>
+                                    <th>Amount</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentClientsTableBody">
+                                <!-- Empty State -->
+                                <tr>
+                                    <td colspan="5" class="text-center p-4 text-muted">No recent clients found.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Temporary Chart Loading for Demo
+        const ctxIncome = document.getElementById('incomeChart').getContext('2d');
+        new Chart(ctxIncome, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Income ($)',
+                    data: [0, 0, 0, 0, 0, 0],
+                    borderColor: '#2E8B57',
+                    backgroundColor: 'rgba(46, 139, 87, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+
+        const ctxProject = document.getElementById('projectChart').getContext('2d');
+        new Chart(ctxProject, {
+            type: 'doughnut',
+            data: {
+                labels: ['Completed', 'In Progress', 'Pending'],
+                datasets: [{
+                    data: [0, 0, 0],
+                    backgroundColor: ['#48BB78', '#ECC94B', '#A0AEC0'],
+                    borderWidth: 0
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, cutout: '70%' }
+        });
+    </script>
+</body>
+
+</html>

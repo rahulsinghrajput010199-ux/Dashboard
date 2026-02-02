@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreelanceFlow | Settings</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .settings-section {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .settings-section:last-child {
+            border-bottom: none;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--border-color);
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fa-solid fa-bolt"></i> FreelanceFlow
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                    <li><a href="clients.html" class="nav-link"><i class="fa-solid fa-users"></i> Clients</a></li>
+                    <li><a href="projects.html" class="nav-link"><i class="fa-solid fa-briefcase"></i> Projects</a></li>
+                    <li><a href="time-tracking.html" class="nav-link"><i class="fa-solid fa-clock"></i> Time
+                            Tracking</a></li>
+                    <li><a href="invoices.html" class="nav-link"><i class="fa-solid fa-file-invoice-dollar"></i>
+                            Invoices</a></li>
+                    <li><a href="analytics.html" class="nav-link"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+                    </li>
+                    <li><a href="#" class="nav-link active"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Wrapper -->
+        <div class="main-content">
+            <!-- Top Navigation -->
+            <header class="topbar">
+                <button id="toggle-sidebar" class="toggle-sidebar-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search settings...">
+                </div>
+
+                <div class="topbar-actions">
+                    <button class="icon-btn theme-toggle" id="theme-toggle">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                    <div class="notifications icon-btn">
+                        <i class="fa-regular fa-bell"></i>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=Rahul+singh&background=1E3A8A&color=fff" alt="User"
+                            class="avatar">
+                        <span class="user-name">Rahul singh</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="container-fluid">
+                <div class="page-header">
+                    <div class="page-header-info">
+                        <h1>Settings</h1>
+                        <p class="text-muted">Manage your profile and account preferences.</p>
+                    </div>
+                </div>
+
+                <div class="card mb-4" style="max-width: 800px;">
+                    <!-- Profile Section -->
+                    <div class="settings-section">
+                        <h3 class="card-title mb-3">Profile Information</h3>
+                        <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                            <div style="text-align: center;">
+                                <img src="https://ui-avatars.com/api/?name=Alex+Doe&background=1E3A8A&color=fff&size=128"
+                                    id="settingsProfileImg"
+                                    style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 1rem; object-fit: cover;"
+                                    alt="Profile">
+                                <br>
+                                <button class="btn btn-outline" id="changePhotoBtn"
+                                    style="font-size: 0.85rem; padding: 0.5rem 1rem;">Change Photo</button>
+                                <input type="file" id="profileUpload" hidden accept="image/*">
+                            </div>
+                            <div style="flex: 1; min-width: 250px;">
+                                <div class="grid-template grid-2"
+                                    style="grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                                    <div class="form-group">
+                                        <label class="form-label">First Name</label>
+                                        <input type="text" class="form-control" id="settingsFirstName" value="Alex">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" id="settingsLastName" value="Doe">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="settingsEmail"
+                                        value="alex.doe@example.com">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Bio</label>
+                                    <textarea class="form-control" id="settingsBio"
+                                        rows="3">Full-stack freelance developer.</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preferences Section -->
+                    <div class="settings-section">
+                        <h3 class="card-title" style="margin-bottom: 1rem;">Preferences</h3>
+                        <div class="grid-template grid-2">
+                            <div class="form-group">
+                                <label class="form-label">Currency</label>
+                                <select class="form-control" id="settingsCurrency">
+                                    <option value="USD">USD ($) - United States Dollar</option>
+                                    <option value="AED">AED (د.إ) - United Arab Emirates Dirham</option>
+                                    <option value="AFN">AFN (؋) - Afghan Afghani</option>
+                                    <option value="ALL">ALL (L) - Albanian Lek</option>
+                                    <option value="AMD">AMD (֏) - Armenian Dram</option>
+                                    <option value="ANG">ANG (ƒ) - Netherlands Antillean Guilder</option>
+                                    <option value="AOA">AOA (Kz) - Angolan Kwanza</option>
+                                    <option value="ARS">ARS ($) - Argentine Peso</option>
+                                    <option value="AUD">AUD ($) - Australian Dollar</option>
+                                    <option value="AWG">AWG (ƒ) - Aruban Florin</option>
+                                    <option value="AZN">AZN (₼) - Azerbaijani Manat</option>
+                                    <option value="BAM">BAM (KM) - Bosnia-Herzegovina Convertible Mark</option>
+                                    <option value="BBD">BBD ($) - Barbadian Dollar</option>
+                                    <option value="BDT">BDT (৳) - Bangladeshi Taka</option>
+                                    <option value="BGN">BGN (лв) - Bulgarian Lev</option>
+                                    <option value="BHD">BHD (.د.ب) - Bahraini Dinar</option>
+                                    <option value="BIF">BIF (FBu) - Burundian Franc</option>
+                                    <option value="BMD">BMD ($) - Bermudan Dollar</option>
+                                    <option value="BND">BND ($) - Brunei Dollar</option>
+                                    <option value="BOB">BOB (Bs.) - Bolivian Boliviano</option>
+                                    <option value="BRL">BRL (R$) - Brazilian Real</option>
+                                    <option value="BSD">BSD ($) - Bahamian Dollar</option>
+                                    <option value="BTN">BTN (Nu.) - Bhutanese Ngultrum</option>
+                                    <option value="BWP">BWP (P) - Botswanan Pula</option>
+                                    <option value="BYN">BYN (Br) - Belarusian Ruble</option>
+                                    <option value="BZD">BZD (BZ$) - Belize Dollar</option>
+                                    <option value="CAD">CAD ($) - Canadian Dollar</option>
+                                    <option value="CDF">CDF (FC) - Congolese Franc</option>
+                                    <option value="CHF">CHF (Fr.) - Swiss Franc</option>
+                                    <option value="CLP">CLP ($) - Chilean Peso</option>
+                                    <option value="CNY">CNY (¥) - Chinese Yuan</option>
+                                    <option value="COP">COP ($) - Colombian Peso</option>
+                                    <option value="CRC">CRC (₡) - Costa Rican Colón</option>
+                                    <option value="CUP">CUP ($) - Cuban Peso</option>
+                                    <option value="CVE">CVE ($) - Cape Verdean Escudo</option>
+                                    <option value="CZK">CZK (Kč) - Czech Koruna</option>
+                                    <option value="DJF">DJF (Fdj) - Djiboutian Franc</option>
+                                    <option value="DKK">DKK (kr) - Danish Krone</option>
+                                    <option value="DOP">DOP (RD$) - Dominican Peso</option>
+                                    <option value="DZD">DZD (د.ج) - Algerian Dinar</option>
+                                    <option value="EGP">EGP (E£) - Egyptian Pound</option>
+                                    <option value="ERN">ERN (Nfk) - Eritrean Nakfa</option>
+                                    <option value="ETB">ETB (Br) - Ethiopian Birr</option>
+                                    <option value="EUR">EUR (€) - Euro</option>
+                                    <option value="FJD">FJD ($) - Fijian Dollar</option>
+                                    <option value="FKP">FKP (£) - Falkland Islands Pound</option>
+                                    <option value="FOK">FOK (kr) - Faroese Króna</option>
+                                    <option value="GBP">GBP (£) - British Pound Sterling</option>
+                                    <option value="GEL">GEL (₾) - Georgian Lari</option>
+                                    <option value="GGP">GGP (£) - Guernsey Pound</option>
+                                    <option value="GHS">GHS (₵) - Ghanaian Cedi</option>
+                                    <option value="GIP">GIP (£) - Gibraltar Pound</option>
+                                    <option value="GMD">GMD (D) - Gambian Dalasi</option>
+                                    <option value="GNF">GNF (FG) - Guinean Franc</option>
+                                    <option value="GTQ">GTQ (Q) - Guatemalan Quetzal</option>
+                                    <option value="GYD">GYD ($) - Guyanaese Dollar</option>
+                                    <option value="HKD">HKD ($) - Hong Kong Dollar</option>
+                                    <option value="HNL">HNL (L) - Honduran Lempira</option>
+                                    <option value="HRK">HRK (kn) - Croatian Kuna</option>
+                                    <option value="HTG">HTG (G) - Haitian Gourde</option>
+                                    <option value="HUF">HUF (Ft) - Hungarian Forint</option>
+                                    <option value="IDR">IDR (Rp) - Indonesian Rupiah</option>
+                                    <option value="ILS">ILS (₪) - Israeli New Sheqel</option>
+                                    <option value="IMP">IMP (£) - Manx Pound</option>
+                                    <option value="INR">INR (₹) - Indian Rupee</option>
+                                    <option value="IQD">IQD (ع.د) - Iraqi Dinar</option>
+                                    <option value="IRR">IRR (﷼) - Iranian Rial</option>
+                                    <option value="ISK">ISK (kr) - Icelandic Króna</option>
+                                    <option value="JEP">JEP (£) - Jersey Pound</option>
+                                    <option value="JMD">JMD ($) - Jamaican Dollar</option>
+                                    <option value="JOD">JOD (د.ا) - Jordanian Dinar</option>
+                                    <option value="JPY">JPY (¥) - Japanese Yen</option>
+                                    <option value="KES">KES (KSh) - Kenyan Shilling</option>
+                                    <option value="KGS">KGS (с) - Kyrgyzstani Som</option>
+                                    <option value="KHR">KHR (៛) - Cambodian Riel</option>
+                                    <option value="KID">KID ($) - Kiribati Dollar</option>
+                                    <option value="KMF">KMF (CF) - Comorian Franc</option>
+                                    <option value="KRW">KRW (₩) - South Korean Won</option>
+                                    <option value="KWD">KWD (د.ك) - Kuwaiti Dinar</option>
+                                    <option value="KYD">KYD ($) - Cayman Islands Dollar</option>
+                                    <option value="KZT">KZT (₸) - Kazakhstani Tenge</option>
+                                    <option value="LAK">LAK (₭) - Laotian Kip</option>
+                                    <option value="LBP">LBP (ل.ل) - Lebanese Pound</option>
+                                    <option value="LKR">LKR (Rs) - Sri Lankan Rupee</option>
+                                    <option value="LRD">LRD ($) - Liberian Dollar</option>
+                                    <option value="LSL">LSL (L) - Lesotho Loti</option>
+                                    <option value="LYD">LYD (ل.د) - Libyan Dinar</option>
+                                    <option value="MAD">MAD (د.م.) - Moroccan Dirham</option>
+                                    <option value="MDL">MDL (L) - Moldovan Leu</option>
+                                    <option value="MKD">MKD (ден) - Macedonian Denar</option>
+                                    <option value="MMK">MMK (K) - Myanmar Kyat</option>
+                                    <option value="MNT">MNT (₮) - Mongolian Tugrik</option>
+                                    <option value="MOP">MOP (MOP$) - Macanese Pataca</option>
+                                    <option value="MRU">MRU (UM) - Mauritanian Ouguiya</option>
+                                    <option value="MUR">MUR (₨) - Mauritian Rupee</option>
+                                    <option value="MVR">MVR (Rf) - Maldivian Rufiyaa</option>
+                                    <option value="MWK">MWK (MK) - Malawian Kwacha</option>
+                                    <option value="MXN">MXN ($) - Mexican Peso</option>
+                                    <option value="MYR">MYR (RM) - Malaysian Ringgit</option>
+                                    <option value="MZN">MZN (MT) - Mozambican Metical</option>
+                                    <option value="NAD">NAD ($) - Namibian Dollar</option>
+                                    <option value="NGN">NGN (₦) - Nigerian Naira</option>
+                                    <option value="NIO">NIO (C$) - Nicaraguan Córdoba</option>
+                                    <option value="NOK">NOK (kr) - Norwegian Krone</option>
+                                    <option value="NPR">NPR (₨) - Nepalese Rupee</option>
+                                    <option value="NZD">NZD ($) - New Zealand Dollar</option>
+                                    <option value="OMR">OMR (ر.ع.) - Omani Rial</option>
+                                    <option value="PAB">PAB (B/.) - Panamanian Balboa</option>
+                                    <option value="PEN">PEN (S/.) - Peruvian Nuevo Sol</option>
+                                    <option value="PGK">PGK (K) - Papua New Guinean Kina</option>
+                                    <option value="PHP">PHP (₱) - Philippine Peso</option>
+                                    <option value="PKR">PKR (₨) - Pakistani Rupee</option>
+                                    <option value="PLN">PLN (zł) - Polish Zloty</option>
+                                    <option value="PYG">PYG (₲) - Paraguayan Guarani</option>
+                                    <option value="QAR">QAR (ر.ق) - Qatari Rial</option>
+                                    <option value="RON">RON (lei) - Romanian Leu</option>
+                                    <option value="RSD">RSD (дин.) - Serbian Dinar</option>
+                                    <option value="RUB">RUB (₽) - Russian Ruble</option>
+                                    <option value="RWF">RWF (FRw) - Rwandan Franc</option>
+                                    <option value="SAR">SAR (ر.س) - Saudi Riyal</option>
+                                    <option value="SBD">SBD ($) - Solomon Islands Dollar</option>
+                                    <option value="SCR">SCR (₨) - Seychellois Rupee</option>
+                                    <option value="SDG">SDG (ج.س.) - Sudanese Pound</option>
+                                    <option value="SEK">SEK (kr) - Swedish Krona</option>
+                                    <option value="SGD">SGD ($) - Singapore Dollar</option>
+                                    <option value="SHP">SHP (£) - Saint Helena Pound</option>
+                                    <option value="SLE">SLE (Le) - Sierra Leonean Leone</option>
+                                    <option value="SOS">SOS (Sh) - Somali Shilling</option>
+                                    <option value="SRD">SRD ($) - Surinamese Dollar</option>
+                                    <option value="SSP">SSP (OK) - South Sudanese Pound</option>
+                                    <option value="STN">STN (Db) - São Tomé and Príncipe Dobra</option>
+                                    <option value="SYP">SYP (LS) - Syrian Pound</option>
+                                    <option value="SZL">SZL (L) - Swazi Lilangeni</option>
+                                    <option value="THB">THB (฿) - Thai Baht</option>
+                                    <option value="TJS">TJS (SM) - Tajikistani Somoni</option>
+                                    <option value="TMT">TMT (m) - Turkmenistani Manat</option>
+                                    <option value="TND">TND (د.ت) - Tunisian Dinar</option>
+                                    <option value="TOP">TOP (T$) - Tongan Paʻanga</option>
+                                    <option value="TRY">TRY (₺) - Turkish Lira</option>
+                                    <option value="TTD">TTD (TT$) - Trinidad and Tobago Dollar</option>
+                                    <option value="TVD">TVD ($) - Tuvaluan Dollar</option>
+                                    <option value="TWD">TWD (NT$) - New Taiwan Dollar</option>
+                                    <option value="TZS">TZS (TSh) - Tanzanian Shilling</option>
+                                    <option value="UAH">UAH (₴) - Ukrainian Hryvnia</option>
+                                    <option value="UGX">UGX (USh) - Ugandan Shilling</option>
+                                    <option value="USD">USD ($) - United States Dollar</option>
+                                    <option value="UYU">UYU ($U) - Uruguayan Peso</option>
+                                    <option value="UZS">UZS (so'm) - Uzbekistan Som</option>
+                                    <option value="VES">VES (Bs) - Venezuelan Bolívar Soberano</option>
+                                    <option value="VND">VND (₫) - Vietnamese Dong</option>
+                                    <option value="VUV">VUV (Vt) - Vanuatu Vatu</option>
+                                    <option value="WST">WST (T) - Samoan Tala</option>
+                                    <option value="XAF">XAF (FCFA) - CFA Franc BEAC</option>
+                                    <option value="XCD">XCD ($) - East Caribbean Dollar</option>
+                                    <option value="XDR">XDR (SDR) - Special Drawing Rights</option>
+                                    <option value="XOF">XOF (CFA) - CFA Franc BCEAO</option>
+                                    <option value="XPF">XPF (₣) - CFP Franc</option>
+                                    <option value="YER">YER (﷼) - Yemeni Rial</option>
+                                    <option value="ZAR">ZAR (R) - South African Rand</option>
+                                    <option value="ZMW">ZMW (ZK) - Zambian Kwacha</option>
+                                    <option value="ZWL">ZWL ($) - Zimbabwean Dollar</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Language</label>
+                                <select class="form-control" id="settingsLanguage">
+                                    <option value="en">English</option>
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                    <option value="de">German</option>
+                                    <option value="zh">Chinese (Mandarin)</option>
+                                    <option value="ja">Japanese</option>
+                                    <option value="ru">Russian</option>
+                                    <option value="pt">Portuguese</option>
+                                    <option value="hi">Hindi</option>
+                                    <option value="ar">Arabic</option>
+                                    <option value="bn">Bengali</option>
+                                    <option value="ur">Urdu</option>
+                                    <option value="id">Indonesian</option>
+                                    <option value="it">Italian</option>
+                                    <option value="tr">Turkish</option>
+                                    <option value="ta">Tamil</option>
+                                    <option value="te">Telugu</option>
+                                    <option value="mr">Marathi</option>
+                                    <option value="vi">Vietnamese</option>
+                                    <option value="th">Thai</option>
+                                    <option value="ko">Korean</option>
+                                    <option value="pl">Polish</option>
+                                    <option value="nl">Dutch</option>
+                                    <option value="fa">Persian</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications Section -->
+                    <div class="settings-section">
+                        <h3 class="card-title" style="margin-bottom: 1rem;">Notifications</h3>
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <h5 style="margin-bottom: 0.25rem;">Email Notifications</h5>
+                                    <p class="text-muted" style="font-size: 0.85rem;">Receive emails about new projects
+                                        and payments.</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="settingsEmailNotify" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <h5 style="margin-bottom: 0.25rem;">Desktop Notifications</h5>
+                                    <p class="text-muted" style="font-size: 0.85rem;">Get pushed notifications on your
+                                        desktop.</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="settingsDesktopNotify">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; display: flex; justify-content: flex-end; gap: 1rem;">
+                        <button class="btn btn-outline" id="cancelSettingsBtn">Cancel</button>
+                        <button class="btn btn-primary" id="saveSettingsBtn">Save Changes</button>
+                    </div>
+
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Reusing the main script for logic -->
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

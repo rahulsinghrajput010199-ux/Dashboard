@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreelanceFlow | Time Tracking</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fa-solid fa-bolt"></i> FreelanceFlow
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                    <li><a href="clients.html" class="nav-link"><i class="fa-solid fa-users"></i> Clients</a></li>
+                    <li><a href="projects.html" class="nav-link"><i class="fa-solid fa-briefcase"></i> Projects</a></li>
+                    <li><a href="#" class="nav-link active"><i class="fa-solid fa-clock"></i> Time Tracking</a></li>
+                    <li><a href="invoices.html" class="nav-link"><i class="fa-solid fa-file-invoice-dollar"></i>
+                            Invoices</a></li>
+                    <li><a href="analytics.html" class="nav-link"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+                    </li>
+                    <li><a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Wrapper -->
+        <div class="main-content">
+            <!-- Top Navigation -->
+            <header class="topbar">
+                <button id="toggle-sidebar" class="toggle-sidebar-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="timeTrackingSearchInput" placeholder="Search time entries...">
+                </div>
+
+                <div class="topbar-actions">
+                    <button class="icon-btn theme-toggle" id="theme-toggle">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                    <div class="notifications icon-btn">
+                        <i class="fa-regular fa-bell"></i>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=Rahul+singh&background=1E3A8A&color=fff" alt="User"
+                            class="avatar">
+                        <span class="user-name">Rahul singh</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="container-fluid">
+                <div class="page-header">
+                    <div class="page-header-info">
+                        <h1>Time Tracking</h1>
+                        <p class="text-muted">Track your billable hours and productivity.</p>
+                    </div>
+                </div>
+
+                <!-- Timer Widget -->
+                <div class="card mb-4" style="border-left: 4px solid var(--primary-color);">
+                    <div class="flex-between" style="flex-wrap: wrap; gap: 1.5rem;">
+                        <input type="text" placeholder="What are you working on?" class="form-control"
+                            style="flex: 1; min-width: 250px;">
+
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div id="timer-display"
+                                style="font-size: 1.5rem; font-weight: 700; font-family: monospace;">00:00:00</div>
+                            <button id="timer-start-btn" class="btn btn-primary flex-center gap-2">
+                                <i class="fa-solid fa-play"></i> Start
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-template grid-2" style="margin-bottom: 2rem;">
+                    <div class="card">
+                        <div class="card-header" style="margin-bottom: 1.5rem;">
+                            <h4 class="card-title" style="margin:0;">Weekly Activity</h4>
+                        </div>
+                        <canvas id="weeklyChart" height="250"></canvas>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" style="margin-bottom: 1.5rem;">
+                            <h4 class="card-title" style="margin:0;">Billable vs Non-Billable</h4>
+                        </div>
+                        <canvas id="billableChart" height="250"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Entries -->
+                <div class="card">
+                    <h4 class="card-title">Recent Entries</h4>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Project</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Duration</th>
+                                    <th>Billable</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="timeTrackingTableBody">
+                                <!-- Empty State -->
+                                <tr>
+                                    <td colspan="6"
+                                        style="text-align: center; padding: 2rem; color: var(--text-muted);">No time
+                                        entries recorded today.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Reusing the main script for logic -->
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
